@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Toy Store</title>
+    
+    <link rel="stylesheet" href="./main.css">
+    
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+</head>
+<body>
+    <div class="hero-section">
+        <div class="header">
+            Logo
+        
+            <sapn style="max-width: 70%;">
+                <a href="./cart.html">
+                    Cart
+                </a>
+                
+                <a href="./account.html">
+                    Account
+                </a>
+            </sapn>
+        </div>
+        <br>
+        <img alt="Toy Image" srcset="toy1-mobile.png 200w, toy1-laptop.png 400w" sizes="(max-width: 600px) 100px, 400px" alt="Hero Image">
+    </div>
+
+    <div class="carousel-heading">
+        New Arrivals
+    </div>
+
+    <!-- Swiper -->
+    <div class="swiper newArrival">
+        <div class="swiper-wrapper" id="newArrival">
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="carousel-heading">
+        Shop By Brands
+    </div>
+
+    <div class="swiper brands">
+        <div class="swiper-wrapper" id="brands">
+            <div class="swiper-slide">
+                <div>
+                    <a href="./lego.html">
+                        <img src="LEGO.png" alt="Lego">
+                    </a>
+                </div>
+                <div>
+                    <span class="brand-heading">
+                        LEGO
+                    </span>
+                    <br><br><br>
+                    <span class="brand-details">
+                        Founded in 1932 by Ole Kirk Kristiansen, and based on the iconic LEGO brick, it is one of the world's leading manufacturers of play materials.
+                    </span>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div>
+                    <a href="./nerf.html">
+                        <img src="nerf-1.png" alt="Nerf" width="50%" height="50%">
+                    </a>
+                </div>
+                <div>
+                    <span class="brand-heading">
+                        NERF
+                    </span>
+                    <br><br><br>
+                    <span class="brand-details">
+                        Nerf blasters have been acclaimed for their popularity, particularly among boys and young adults. Additionally, a community has grown around Nerf blasters, as competitive and casual “Nerf wars” ...
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <footer>
+        Terms and conditions. <br>
+        &copy 2022
+    </footer>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        let data = [
+            {
+                img: 'toy1-mobile.png',
+                name: 'Lego Station Master',
+                price: '500'
+            },
+            {
+                img: 'toy2-mobile.png',
+                name: 'Lego Station Clerk',
+                price: '300'
+            },
+            {
+                img: 'toy3-mobile.png',
+                name: 'Teddy Bear (Soft Toy)',
+                price: '400'
+            },
+            {
+                img: 'toy4-mobile.png',
+                name: 'Barbie Doll',
+                price: '900'
+            },
+            {
+                img: 'toy5-mobile.png',
+                name: 'Nerf Gun',
+                price: '1200'
+            }
+        ];
+
+        window.addEventListener('load', () => {
+            let swiperWrapper = document.getElementById("newArrival");
+            swiperWrapper.innerHTML = '';
+            data.map(d => {
+                let card = document.createElement('div');
+                card.classList.add('swiper-slide');
+                card.innerHTML = `
+                    <span class='add-to-favourite'>
+                        <img src="favourites.png" width="42px" height="42px" onclick="addToFav(this)">
+                    </span>
+                    <img src=${d.img} height="200px" width="200px">
+                    ${d.name} <br><br>
+                    ₹ ${d.price}
+                    <span class="add-to-cart">
+                        <button>
+                            Add to Cart
+                        </button>
+                    </span>
+                `;
+
+                swiperWrapper.appendChild(card);
+            })
+            let swiper = new Swiper(".newArrival", {
+                slidesPerView: 4,
+                spaceBetween: 10,
+                navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+                },
+                autoplay: true,
+                // loop: true
+            });
+        })
+
+        function addToFav (e){
+            e.src = "favourites-filled.png";
+            return null;
+        }
+
+        let brands = new Swiper(".brands", {
+            slidesPerView: 1,
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            autoplay: true
+        });
+    </script>
+</body>
+</html>
