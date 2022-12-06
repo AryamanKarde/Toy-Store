@@ -1,0 +1,55 @@
+body{
+    padding: 1%;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav a:link{
+    color: black;
+    outline: none;
+    text-decoration: none;
+    font-family: "courier";
+    font-size: 1.5rem;
+    padding: 5%;
+}
+
+.nav a:hover{
+    outline: auto;
+}
+
+.item1 {
+    grid-area: name;
+    width: 500px;
+}
+
+.item2 {
+    grid-area: image;
+}
+
+.item3 {
+    grid-area: price;
+}
+
+.item4 {
+    grid-area: qty;
+}
+
+.particulars{
+    padding: 1%;
+    display: grid;
+    grid-template-areas: 
+    'name image'
+    'price qty';
+    gap: 10px;
+    align-items: center;
+}
+
+button{
+    background-color: black;
+    color: white;
+    font-size: larger;
+    padding: 1%;
+}

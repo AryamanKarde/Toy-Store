@@ -8,6 +8,9 @@
     <title>Toy Store</title>
     
     <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./root.css">
+
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
     
     <!-- Link Swiper's CSS -->
     <link
@@ -18,20 +21,22 @@
 <body>
     <div class="hero-section">
         <div class="header">
-            Logo
+            <a href="./index.html">
+                <img src="logo.svg" alt="Logo" width="100" height="100">
+            </a>
         
-            <sapn style="max-width: 70%;">
-                <a href="./cart.html">
+            <sapn style="width: 15%;">
+                <a href="./cart.html" style="padding: 5%;">
                     Cart
                 </a>
                 
-                <a href="./account.html">
+                <a href="./account.html" style="padding: 5%;">
                     Account
                 </a>
             </sapn>
         </div>
         <br>
-        <img alt="Toy Image" srcset="toy1-mobile.png 200w, toy1-laptop.png 400w" sizes="(max-width: 600px) 100px, 400px" alt="Hero Image">
+        <img id="hero-image" alt="Toy Image" srcset="toy1-mobile.png 200w, toy1-laptop.png 400w" sizes="(max-width: 600px) 100px, 400px" alt="Hero Image">
     </div>
 
     <div class="carousel-heading">
