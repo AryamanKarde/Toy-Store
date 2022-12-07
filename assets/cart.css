@@ -1,10 +1,16 @@
 body{
+    padding: 0;
+    margin: 0;
+}
+
+.cart{
     padding: 1%;
 }
 
 .header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .nav a:link{
@@ -45,6 +51,7 @@ body{
     'price qty';
     gap: 10px;
     align-items: center;
+    justify-content: center;
 }
 
 button{
@@ -52,4 +59,13 @@ button{
     color: white;
     font-size: larger;
     padding: 1%;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+li::marker{
+    font-size: x-large;
+    color: crimson;
 }

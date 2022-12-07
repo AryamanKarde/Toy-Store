@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy Store</title>
+
+    <link rel="stylesheet" href="assets/account.css">
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <div class="account">
+        <div class="header">
+            <a href="./index.html">
+                <img src="assets/logo-red.svg" alt="Logo" width="100" height="100">
+            </a>
+        
+            <sapn style="width: 15%;" class="nav">
+                <a href="./cart.html">
+                    Cart
+                </a>
+                
+                <a href="./account.html">
+                    Sign In
+                </a>
+            </sapn>
+        </div>
+
+        <form method="post" id="signin">
+            <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Sign In</h1>
+            <table class="signInForm" cellspacing="20" cellpadding="5">
+                <tr>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        <input type="email" name="email" id="email-input" required />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Password
+                    </td>
+                    <td>
+                        <input type="password" name="password" id="password-input" required />
+                        <br>
+                        <a href="" style="color: black; outline: none; font-size: smaller;">Reset Password</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="submit" value="Sign In">
+                    </td>
+                </tr>
+            </table>
+            <pre style="font-size: large;">New User ?<br>Click <a onclick="toogle();" style="color: black; outline: none; cursor: pointer;">here</a> to sign up.
+            </pre>
+        </form>
+
+        <form method="post" id="signup" style="display: none;">
+            <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Registration</h1>
+            <table class="signInForm" cellspacing="20" cellpadding="5">
+                <tr>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        <input type="email" name="email" id="email-input" required />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Password
+                    </td>
+                    <td>
+                        <input type="password" name="password" id="password-input" required />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="submit" value="Sign Up">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        function toogle() {
+            document.getElementById('signin').style.display = 'none';
+            document.getElementById('signup').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

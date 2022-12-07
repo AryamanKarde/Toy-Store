@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy Store</title>
+
+    <link rel="stylesheet" href="assets/checkout.css">
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <div class="checkout">
+        <div class="header">
+            <a href="./index.html">
+                <img src="assets/logo-red.svg" alt="Logo" width="100" height="100">
+            </a>
+        
+            <sapn style="width: 15%;" class="nav">
+                <a href="./cart.html">
+                    Cart
+                </a>
+                
+                <a href="./account.html">
+                    Sign In
+                </a>
+            </sapn>
+        </div>
+
+        <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Checkout Summary</h1>
+
+        <div class="checkout-container">
+            
+            <form style="text-align: center; margin-top: 60px;">
+                <label for="address" style="vertical-align: top; font-size: x-large;">
+                    Delivery Address : 
+                </label>
+                <textarea name="address" id="address" cols="100" rows="20" required></textarea>
+                <br><br><br>
+                <input type="submit" value="Place Order" onsubmit="(e) => {e.preventDefault(); alert('Order Placed Successfully');}">
+            </form>
+
+            <table cellspacing="20" cellpadding="5">
+                <tr>
+                    <th colspan="4">
+                        <h2>
+                            Basket Summary
+                        </h2>
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <img src="./toy1-mobile.png" alt="Product" width="50px" height="50px">
+                    </td>
+                    <td>
+                        Lego Station Master
+                    </td>
+                    <td>
+                        ₹ 500
+                    </td>
+                    <td>
+                        X 1
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <img src="./toy5-mobile.png" alt="Product" width="50px" height="50px">
+                    </td>
+                    <td>
+                        Nerf Gun
+                    </td>
+                    <td>
+                        ₹ 1200
+                    </td>
+                    <td>
+                        X 1
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <hr>
+                    </td>
+                </tr>
+
+                <tfoot>
+                    <td colspan="2" style="text-align: center;">
+                        <b>
+                            Total Amount
+                        </b>
+                    </td>
+                    <td>
+                        ₹ 1700
+                    </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

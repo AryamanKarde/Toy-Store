@@ -1,0 +1,42 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.checkout{
+    padding: 1%;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav a:link{
+    color: black;
+    outline: none;
+    text-decoration: none;
+    font-family: "courier";
+    font-size: 1.5rem;
+    padding: 5%;
+}
+
+.nav a:hover{
+    outline: auto;
+}
+
+.checkout-container{
+    display: flex;
+    justify-content: space-evenly;
+    border: 10px gray double;
+    padding: 1%;
+}
+
+input[type="submit"]{
+    padding: 20px;
+    background-color: green;
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+}

@@ -1,0 +1,53 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.account{
+    padding: 1%;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav a:link{
+    color: black;
+    outline: none;
+    text-decoration: none;
+    font-family: "courier";
+    font-size: 1.5rem;
+    padding: 5%;
+}
+
+.nav a:hover{
+    outline: auto;
+}
+
+input[type="submit"]{
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-size: large;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+form{
+    width: 400px;
+    margin: 10px auto;
+    text-align: center;
+    background-color: crimson;
+    color: white;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 10px 5px 50px black;
+}
+
+.signInForm{
+    margin: 30px auto 5px;
+    text-align: left;
+    font-size: x-large;
+}
