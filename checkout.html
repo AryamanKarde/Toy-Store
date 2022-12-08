@@ -37,6 +37,11 @@
                     Delivery Address : 
                 </label>
                 <textarea name="address" id="address" cols="100" rows="20" required></textarea>
+                <br>
+                <label for="payment" style="font-size: x-large;">
+                    Mode of payment :
+                </label>
+                <input type="radio" name="payment" value="cash" checked disabled> Cash </input>
                 <br><br><br>
                 <input type="submit" value="Place Order" onsubmit="(e) => {e.preventDefault(); alert('Order Placed Successfully');}">
             </form>
@@ -99,5 +104,10 @@
             </table>
         </div>
     </div>
+
+    <footer>
+        Terms and conditions. <br>
+        &copy 2022
+    </footer>
 </body>
 </html>

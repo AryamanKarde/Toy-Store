@@ -69,3 +69,14 @@ li::marker{
     font-size: x-large;
     color: crimson;
 }
+
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    height: 20vh;
+    font-size: x-large;
+}

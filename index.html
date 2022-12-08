@@ -144,13 +144,13 @@
                 card.classList.add('swiper-slide');
                 card.innerHTML = `
                     <span class='add-to-favourite'>
-                        <img src="favourites.png" width="42px" height="42px" onclick="addToFav(this)">
+                        <img src="favourites.png" width="42px" height="42px" onclick="addToFav(this)" id="cart">
                     </span>
                     <img src=${d.img} height="200px" width="200px">
                     ${d.name} <br><br>
                     ₹ ${d.price}
                     <span class="add-to-cart">
-                        <button>
+                        <button onclick="addToCart(this)">
                             Add to Cart
                         </button>
                     </span>
@@ -172,7 +172,6 @@
 
         function addToFav (e){
             e.src = "favourites-filled.png";
-            return null;
         }
 
         let brands = new Swiper(".brands", {
@@ -182,6 +181,10 @@
             },
             autoplay: true
         });
+
+        function addToCart(e) {
+            e.textContent = "Added";
+        }
     </script>
 </body>
 </html>
