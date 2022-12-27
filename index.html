@@ -200,7 +200,7 @@
             let basketDetails = JSON.parse(localStorage.getItem("addToBasket"));
             if(basketDetails.filter(ele => ele.name == e.parentElement.parentElement.children.productName.innerText)?.length){
                 let oldValue = basketDetails.filter(ele => ele.name == e.parentElement.parentElement.children.productName.innerText)[0].qty
-                basketDetails.filter(ele => ele.name === e.parentElement.parentElement.children.productName.innerText)[0].qty = oldValue + 1;
+                basketDetails.filter(ele => ele.name === e.parentElement.parentElement.children.productName.innerText)[0].qty = +oldValue + 1;
             }
             else{
                 basketDetails.push({
