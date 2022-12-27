@@ -80,3 +80,16 @@ footer{
     height: 20vh;
     font-size: x-large;
 }
+
+.special-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: -webkit-fill-available;
+    margin: auto;
+    height: 20vh;
+    font-size: x-large;
+    bottom: 0;
+    position: absolute;
+}

@@ -7,22 +7,22 @@
     
     <title>Toy Store</title>
     
-    <link rel="stylesheet" href="assets/main.css">
-    <link rel="stylesheet" href="assets/root.css">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/root.css">
 
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
     <!-- Link Swiper's CSS -->
     <link
       rel="stylesheet"
-      href="./assets/swiper-bundle.min.css"
+      href="./assets/styles/swiper-bundle.min.css"
     />
 </head>
 <body>
     <div class="hero-section">
         <div class="header">
             <a href="./index.html">
-                <img src="assets/logo.svg" alt="Logo" width="100" height="100">
+                <img src="assets/images/logo.svg" alt="Logo" width="100" height="100">
             </a>
         
             <sapn style="width: 15%;">
@@ -36,7 +36,7 @@
             </sapn>
         </div>
         <br>
-        <img id="hero-image" alt="Toy Image" srcset="toy1-mobile.png 200w, toy1-laptop.png 400w" sizes="(max-width: 600px) 100px, 400px" alt="Hero Image">
+        <img id="hero-image" alt="Toy Image" srcset="./assets/images/toy1-mobile.png 200w, ./assets/images/toy1-laptop.png 400w" sizes="(max-width: 600px) 100px, 400px" alt="Hero Image">
     </div>
 
     <div class="carousel-heading">
@@ -65,7 +65,7 @@
             <div class="swiper-slide">
                 <div>
                     <a href="./lego.html">
-                        <img src="LEGO.png" alt="Lego">
+                        <img src="./assets/images/LEGO.png" alt="Lego">
                     </a>
                 </div>
                 <div>
@@ -81,7 +81,7 @@
             <div class="swiper-slide">
                 <div>
                     <a href="./nerf.html">
-                        <img src="nerf-1.png" alt="Nerf" width="50%" height="50%">
+                        <img src="./assets/images/nerf-1.png" alt="Nerf" width="50%" height="50%">
                     </a>
                 </div>
                 <div>
@@ -104,7 +104,7 @@
         &copy 2022
     </footer>
     <!-- Swiper JS -->
-    <script src="assets/swiper-bundle.min.js" type="application/javascript"></script>
+    <script src="assets/js/swiper-bundle.min.js" type="application/javascript"></script>
 
     <!-- Initialize Swiper -->
     <script>
@@ -139,16 +139,17 @@
         window.addEventListener('load', () => {
             let swiperWrapper = document.getElementById("newArrival");
             swiperWrapper.innerHTML = '';
-            data.map(d => {
+            data.map((d, key) => {
                 let card = document.createElement('div');
                 card.classList.add('swiper-slide');
+                card.id = key;
                 card.innerHTML = `
                     <span class='add-to-favourite'>
-                        <img src="favourites.png" width="42px" height="42px" onclick="addToFav(this)" id="cart">
+                        <img src="./assets/images/favourites.png" width="42px" height="42px" onclick="addToFav(this)" id="cart">
                     </span>
-                    <img src=${d.img} height="200px" width="200px">
-                    ${d.name} <br><br>
-                    ₹ ${d.price}
+                    <img src=${"./assets/images/"+d.img} height="200px" width="200px" name="imageSrc" />
+                    <span name="productName">${d.name} </span><br><br>
+                    <span name="productPrice">₹ ${d.price}</span>
                     <span class="add-to-cart">
                         <button onclick="addToCart(this)">
                             Add to Cart
@@ -165,13 +166,16 @@
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
                 },
-                autoplay: true,
+                autoplay: {
+                    pauseOnMouseEnter: true,
+                    disableOnInteraction: false
+                },
                 // loop: true
             });
         })
 
         function addToFav (e){
-            e.src = "favourites-filled.png";
+            e.src = "./assets/images/favourites-filled.png";
         }
 
         let brands = new Swiper(".brands", {
@@ -179,11 +183,34 @@
             pagination: {
                 el: ".swiper-pagination",
             },
-            autoplay: true
+            autoplay: {
+                pauseOnMouseEnter: true,
+                disableOnInteraction: false
+            }
         });
 
         function addToCart(e) {
             e.textContent = "Added";
+            e.disabled = true;
+            if(!localStorage.hasOwnProperty('addToBasket')){
+                let obj = new Array();
+                localStorage.setItem("addToBasket", JSON.stringify(obj));
+            }
+
+            let basketDetails = JSON.parse(localStorage.getItem("addToBasket"));
+            if(basketDetails.filter(ele => ele.name == e.parentElement.parentElement.children.productName.innerText)?.length){
+                let oldValue = basketDetails.filter(ele => ele.name == e.parentElement.parentElement.children.productName.innerText)[0].qty
+                basketDetails.filter(ele => ele.name === e.parentElement.parentElement.children.productName.innerText)[0].qty = oldValue + 1;
+            }
+            else{
+                basketDetails.push({
+                    src: `${e.parentElement.parentElement.children.imageSrc.src}`,
+                    name: `${e.parentElement.parentElement.children.productName.innerText}`,
+                    price: `${e.parentElement.parentElement.children.productPrice.innerText}`,
+                    qty: 1
+                })
+            }
+            localStorage.setItem("addToBasket", JSON.stringify(basketDetails));
         }
     </script>
 </body>

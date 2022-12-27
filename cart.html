@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toy Store</title>
     
-    <link rel="stylesheet" href="assets/cart.css">
+    <link rel="stylesheet" href="assets/styles/cart.css">
 
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <body>
     <div class="cart">
         <div class="header">
             <a href="./index.html">
-                <img src="assets/logo-red.svg" alt="Logo" width="100" height="100">
+                <img src="assets/images/logo-red.svg" alt="Logo" width="100" height="100">
             </a>
         
             <sapn style="width: 15%;" class="nav">
@@ -28,64 +28,87 @@
             </sapn>
         </div>
 
-        <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">My Cart</h1>
-
-        <form action="./checkout.html" method="post">
-            <fieldset>
-                <ol type="1">
-                    <li>
-                        <div class="particulars">
-                            <span class="item1">
-                                <h1>
-                                    Lego Station Master
-                                </h1>
-                            </span>
-                            <img src="./toy1-mobile.png" alt="Product" class="item2">
-                            <span class="item3">
-                                <h4>
-                                    ₹ 500
-                                </h4>
-                            </span>
-                            <span class="item4">
-                                <input type="number" name="pdt-qty" value="1" min="1" />
-                            </span>
-                        </div>
-                    </li>
-
-                    <hr>
-
-                    <li>
-                        <div class="particulars">
-                            <span class="item1">
-                                <h1>
-                                    Nerf Gun
-                                </h1>
-                            </span>
-                            <img src="./toy5-mobile.png" alt="Product" class="item2" width="200px" height="200px">
-                            <span class="item3">
-                                <h4>
-                                    ₹ 1200
-                                </h4>
-                            </span>
-                            <span class="item4">
-                                <input type="number" name="pdt-qty" value="1" min="1" />
-                            </span>
-                        </div>
-                    </li>
-                </ol>
-
-                <div style="text-align: center;">
-                    <button type="submit">
-                        Proceed to Checkout
-                    </button>
-                </div>
-            </fieldset>
-        </form>
+        <div id="main">
+        </div>
     </div>
 
-    <footer>
-        Terms and conditions. <br>
-        &copy 2022
-    </footer>
+    <script>
+        function loadData(e){
+            let data = JSON.parse(localStorage.getItem("addToBasket"));
+            if(data && data.length){
+                let list = data.map(data => `
+                 <li>
+                    <div class="particulars">
+                        <span class="item1">
+                            <h1>
+                                ${data.name}
+                            </h1>
+                        </span>
+                        <img src="${data.src}" alt="Product" class="item2" width="200px" height="200px">
+                        <span class="item3">
+                            <h4>
+                                ${data.price}
+                            </h4>
+                        </span>
+                        <span class="item4">
+                            <input type="number" name="pdt-qty" value="${data.qty || 1}" min="1" onchange="updateQuantity('${data.name}', this)" />
+                            <img src="assets/images/delete.png" onclick="remove('${data.name}')" style="vertical-align: bottom; cursor: pointer;" />
+                        </span>
+                    </div>
+                 </li>
+                `);
+
+                e.innerHTML = `
+                    <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">My Cart</h1>
+                    <form onsubmit="return false;">
+                        <fieldset>
+                            <ol type="1">
+                                ${ list.join("<hr>") }
+                            </ol>
+
+                            <div style="text-align: center;">
+                                <button type="submit" onclick="window.location.href = './checkout.html'">
+                                    Proceed to Checkout
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <footer>
+                        Terms and conditions. <br>
+                        &copy 2022
+                    </footer>
+                    `;
+            }
+            else{
+                e.innerHTML = `
+                <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    Your Cart is Empty.
+                </h1>
+                <div class="special-footer">
+                    Terms and conditions. <br>
+                    &copy 2022
+                </div>`;
+            }
+        }
+
+        function remove(name){
+            let sure = confirm(`Are you sure you want to delete item ${name} ?`);
+            if(sure){
+                let basketDetails = JSON.parse(localStorage.getItem("addToBasket"));
+                basketDetails = basketDetails.filter(e => e.name !== name);
+                localStorage.setItem("addToBasket", JSON.stringify(basketDetails));
+                loadData(document.getElementById('main'));
+            }
+        }
+
+        function updateQuantity(name, input){
+            let basketDetails = JSON.parse(localStorage.getItem("addToBasket"));
+            basketDetails.filter(e => e.name == name)[0].qty = input.value;
+            localStorage.setItem("addToBasket", JSON.stringify(basketDetails));
+            loadData(document.getElementById('main'));
+        }
+
+        loadData(document.getElementById('main'));
+    </script>
 </body>
 </html>

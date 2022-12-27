@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toy Store</title>
 
-    <link rel="stylesheet" href="assets/account.css">
+    <link rel="stylesheet" href="assets/styles/account.css">
 
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <body>
     <div class="account">
         <div class="header">
             <a href="./index.html">
-                <img src="assets/logo-red.svg" alt="Logo" width="100" height="100">
+                <img src="assets/images/logo-red.svg" alt="Logo" width="100" height="100">
             </a>
         
             <sapn style="width: 15%;" class="nav">
@@ -28,7 +28,7 @@
             </sapn>
         </div>
 
-        <form method="post" id="signin">
+        <form id="signin" onsubmit="return false;">
             <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Sign In</h1>
             <table class="signInForm" cellspacing="20" cellpadding="5">
                 <tr>
@@ -51,15 +51,15 @@
 
                 <tr>
                     <td colspan="2" style="text-align: center;">
-                        <input type="submit" value="Sign In">
+                        <input type="submit" value="Sign In" onclick="signIn()">
                     </td>
                 </tr>
             </table>
-            <pre style="font-size: large;">New User ?<br>Click <a onclick="toogle();" style="color: black; outline: none; cursor: pointer;">here</a> to sign up.
+            <pre style="font-size: large;">New User ?<br>Click <a onclick="toogleToSignUp();" style="color: black; outline: none; cursor: pointer;">here</a> to sign up.
             </pre>
         </form>
 
-        <form method="post" id="signup" style="display: none;">
+        <form id="signup" style="display: none;" onsubmit="return false;">
             <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Registration</h1>
             <table class="signInForm" cellspacing="20" cellpadding="5">
                 <tr>
@@ -82,7 +82,7 @@
 
                 <tr>
                     <td colspan="2" style="text-align: center;">
-                        <input type="submit" value="Sign Up">
+                        <input type="submit" value="Sign Up" onclick="signUp()">
                     </td>
                 </tr>
             </table>
@@ -95,9 +95,65 @@
     </footer>
 
     <script>
-        function toogle() {
+        function toogleToSignUp() {
             document.getElementById('signin').style.display = 'none';
             document.getElementById('signup').style.display = 'block';
+        }
+
+        function toogleToSignIn() {
+            document.getElementById('signin').style.display = 'block';
+            document.getElementById('signup').style.display = 'none';
+        }
+
+        function signUp(){
+            let email = document.querySelector("#signup input[name='email']").value;
+            let password = document.querySelector("#signup input[name='password']").value;
+
+            if(!localStorage.hasOwnProperty('authorization')){
+                let obj = new Array();
+                obj.push({
+                    email,
+                    password
+                });
+                localStorage.setItem("authorization", JSON.stringify(obj));
+                alert("Account created successfully.");
+                toogleToSignIn();
+            }else{
+                let authorization = JSON.parse(localStorage.getItem("authorization"));
+                if(authorization.filter(obj => obj.email == email).length){
+                    alert("You already have an account.");
+                }else{
+                    authorization.push({
+                        email,
+                        password
+                    });
+                    localStorage.setItem("authorization", JSON.stringify(authorization));
+                    toogleToSignIn();
+                    alert("Account created successfully.");
+                }
+            }
+        }
+
+        function signIn(){
+            let email = document.querySelector("#signin input[name='email']")?.value;
+            let password = document.querySelector("#signin input[name='password']")?.value;
+
+            if(!localStorage.hasOwnProperty('authorization')){
+                alert("First create an account!");
+                toogleToSignUp();
+            }else{
+                let authorization = JSON.parse(localStorage.getItem("authorization"));
+                if(authorization.filter(obj => obj.email == email).length){
+                    let obj = authorization.filter(obj => obj.email == email)[0];
+                    if(obj.email == email && obj.password == password)
+                     alert("Successful Signed In !");
+                    else
+                     alert("Username or Password didn't matched.");
+                }else{
+                    alert("First create an account!");
+                    toogleToSignUp();
+                }
+            }
         }
     </script>
 </body>

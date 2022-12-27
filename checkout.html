@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toy Store</title>
 
-    <link rel="stylesheet" href="assets/checkout.css">
+    <link rel="stylesheet" href="./assets/styles/checkout.css">
 
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
 </head>
 <body>
     <div class="checkout">
         <div class="header">
             <a href="./index.html">
-                <img src="assets/logo-red.svg" alt="Logo" width="100" height="100">
+                <img src="./assets/images/logo-red.svg" alt="Logo" width="100" height="100">
             </a>
         
             <sapn style="width: 15%;" class="nav">
@@ -32,7 +32,7 @@
 
         <div class="checkout-container">
             
-            <form style="text-align: center; margin-top: 60px;">
+            <form style="text-align: center; margin-top: 60px;" onsubmit="return false;">
                 <label for="address" style="vertical-align: top; font-size: x-large;">
                     Delivery Address : 
                 </label>
@@ -43,64 +43,10 @@
                 </label>
                 <input type="radio" name="payment" value="cash" checked disabled> Cash </input>
                 <br><br><br>
-                <input type="submit" value="Place Order" onsubmit="(e) => {e.preventDefault(); alert('Order Placed Successfully');}">
+                <input type="submit" value="Place Order" onclick="address.value && alert('Order Placed Successfully')">
             </form>
 
-            <table cellspacing="20" cellpadding="5">
-                <tr>
-                    <th colspan="4">
-                        <h2>
-                            Basket Summary
-                        </h2>
-                    </th>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img src="./toy1-mobile.png" alt="Product" width="50px" height="50px">
-                    </td>
-                    <td>
-                        Lego Station Master
-                    </td>
-                    <td>
-                        ₹ 500
-                    </td>
-                    <td>
-                        X 1
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <img src="./toy5-mobile.png" alt="Product" width="50px" height="50px">
-                    </td>
-                    <td>
-                        Nerf Gun
-                    </td>
-                    <td>
-                        ₹ 1200
-                    </td>
-                    <td>
-                        X 1
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="4">
-                        <hr>
-                    </td>
-                </tr>
-
-                <tfoot>
-                    <td colspan="2" style="text-align: center;">
-                        <b>
-                            Total Amount
-                        </b>
-                    </td>
-                    <td>
-                        ₹ 1700
-                    </td>
-                </tfoot>
+            <table cellspacing="20" cellpadding="5" id="summaryTable">
             </table>
         </div>
     </div>
@@ -109,5 +55,60 @@
         Terms and conditions. <br>
         &copy 2022
     </footer>
+
+    <script>
+        function loadData(e){
+            let data = JSON.parse(localStorage.getItem("addToBasket"));
+            let list = data.map(data => `
+                <tr>
+                    <td>
+                        <img src="${data.src}" alt="${data.name}" width="50px" height="50px">
+                    </td>
+                    <td>
+                        ${data.name}
+                    </td>
+                    <td>
+                        ${data.price}
+                    </td>
+                    <td>
+                        X ${data.qty}
+                    </td>
+                </tr>
+            `);
+
+            let totalAmount = data.map(d => d.price.split("₹ ")[1] * d.qty).reduce((prev, curr) => prev + curr, 0);
+
+            e.innerHTML = `
+            <tr>
+                <th colspan="4">
+                    <h2>
+                        Basket Summary
+                    </h2>
+                </th>
+            </tr>
+            
+            ${ list.join("") }
+
+            <tr>
+                <td colspan="4">
+                    <hr>
+                </td>
+            </tr>
+
+            <tfoot>
+                <td colspan="2" style="text-align: center;">
+                    <h3>
+                        Total Amount
+                    </h3>
+                </td>
+                <td>
+                    ₹ ${totalAmount}
+                </td>
+            </tfoot>
+            `;
+        }
+
+        loadData(document.getElementById('summaryTable'));
+    </script>
 </body>
 </html>
